@@ -8,7 +8,7 @@ module.exports = (sequelize) =>{
             allowNull: false,
             autoIncrement:true
         },
-        courseName:{
+        productName:{
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -28,23 +28,23 @@ module.exports = (sequelize) =>{
             type: DataTypes.INTEGER,
             allowNull:false
         },
-        includes:{
-            type: DataTypes.ARRAY(DataTypes.STRING),
+        type:{
+            type: DataTypes.STRING,
             allowNull:false
         },
-        requirements:{
-            type: DataTypes.ARRAY(DataTypes.STRING),
+        color:{
+            type: DataTypes.STRING,
             allowNull:false
         },
-        payment:{
-            type: DataTypes.ARRAY(DataTypes.STRING),
+        state:{
+            type: DataTypes.STRING,
             allowNull:false
         },
-        theoricSchedule:{
-            type: DataTypes.ARRAY(DataTypes.STRING),
+        size:{
+            type: DataTypes.STRING,
             allowNull:false
         },
-        practiceSchedule:{
+        seasson:{
             type: DataTypes.STRING,
             allowNull:false
         }
