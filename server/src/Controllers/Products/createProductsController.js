@@ -1,13 +1,9 @@
-const {courses} =require("../../db")
+const {products} =require("../../db")
 
 const createProductsController = async (body) =>{
     console.log(body)
-    const {courseName} = body
-    const [newCourse, created] = await courses.findOrCreate({
-        where: {courseName},
-        defaults: {...body}
-    })
-    if(created) return newCourse.dataValues
+    const newProduct= await products.create({...body})
+    if(newProduct) return newProduct.dataValues
     return false
 }
 

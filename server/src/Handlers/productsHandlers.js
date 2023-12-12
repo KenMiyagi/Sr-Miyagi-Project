@@ -29,8 +29,8 @@ const createBulkProductHandler = async (req, res) =>{
 
 const getAllProductsHandler = async (req, res) =>{
     try {
-        const courses = await getAllProductsController()
-        if(courses) return res.status(200).json(courses)
+        const products = await getAllProductsController()
+        if(products) return res.status(200).json(products)
         return res.status(400).json({error: "There is no courses."})
         
     } catch (error) {
@@ -40,9 +40,9 @@ const getAllProductsHandler = async (req, res) =>{
 
 const getProductByIdHandler = async (req, res) =>{
     try {
-        const course = await getProductByIdController(req.params.id)
-        if(course) return res.status(200).json(course)
-        return res.status(400).json({error:"The course couldn't be found"})
+        const product = await getProductByIdController(req.params.id)
+        if(product) return res.status(200).json(product)
+        return res.status(400).json({error:"The product couldn't be found"})
     } catch (error) {
         res.status(500).json({error:error.message})
     }

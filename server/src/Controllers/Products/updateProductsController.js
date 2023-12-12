@@ -1,13 +1,13 @@
-const { courses } = require("../../db");
+const { products } = require("../../db");
 
 const updateProductsController = async (body, id) => {
-  const updated = await courses.update(body, { where: { id: id } });
+  const updated = await products.update(body, { where: { id: id } });
 
   if (updated) {
-    const updatedCourse = await courses.findOne({
+    const updatedProduct = await products.findOne({
       where: { id },
     });
-    return updatedCourse;
+    return updatedProduct;
   }
   return false;
 };

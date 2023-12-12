@@ -1,10 +1,10 @@
-const {courses} = require("../../db")
+const {products} = require("../../db")
 
 const getProductByIdController = async (id) =>{
-    const course = await courses.findOne({
+    const product = await products.findOne({
         where: {id}
     })
-    if(course) return course
+    if(product) return product
     return false
 }
 

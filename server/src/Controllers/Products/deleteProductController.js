@@ -1,10 +1,10 @@
-const { courses } = require("../../db")
+const { products } = require("../../db")
 
 const deleteProductController = async (id) =>{
-    const deletedCourse = await courses.destroy({
+    const deletedProduct = await products.destroy({
         where:{id}
     })
-    if(deletedCourse) return true
+    if(deletedProduct) return true
     return false
 }
 

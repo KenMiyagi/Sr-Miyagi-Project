@@ -1,6 +1,6 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
-
+const ProductsModel = require("./Models/products")
 const { DB_USER, DB_PASSWORD, DB_HOST, SERVER_URL } = process.env;
 
 /* const sequelize = new Sequelize(SERVER_URL, {
@@ -19,11 +19,14 @@ const sequelize = new Sequelize(
   { logging: false, native: false }
 );
 
-/* const {
+ProductsModel(sequelize)
 
+const {
+products
 } = sequelize.models;
- */
+
 module.exports = {
+  products,
   ...sequelize.models,
   conn: sequelize,
 };
