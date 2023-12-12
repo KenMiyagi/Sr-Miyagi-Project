@@ -1,11 +1,11 @@
 const {courses} = require("../../db")
 
-const getAllCoursesController = async () =>{
+const getAllProductsController = async () =>{
     const allCourses = await courses.findAll()
     if(allCourses.length > 0) return allCourses
     return false
 }
 
 module.exports= {
-    getAllCoursesController
+    getAllProductsController
 }

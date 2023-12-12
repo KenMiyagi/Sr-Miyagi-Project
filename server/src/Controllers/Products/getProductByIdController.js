@@ -1,6 +1,6 @@
 const {courses} = require("../../db")
 
-const getCourseByIdController = async (id) =>{
+const getProductByIdController = async (id) =>{
     const course = await courses.findOne({
         where: {id}
     })
@@ -9,5 +9,5 @@ const getCourseByIdController = async (id) =>{
 }
 
 module.exports = {
-    getCourseByIdController
+    getProductByIdController
 }

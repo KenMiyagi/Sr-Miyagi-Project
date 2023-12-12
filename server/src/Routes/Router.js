@@ -1,11 +1,11 @@
 const { Router } = require("express");
 const router = Router();
 
-const coursesRoute = require("./coursesRoute");
+const productsRoute = require("./productsRoute");
 const questionsRoute = require("./questionsRoute");
 const proceduresRoute = require("./proceduresRoute");
 
-router.use("/courses", coursesRoute);
+router.use("/products", productsRoute);
 router.use("/faqs", questionsRoute);
 router.use("/procedures", proceduresRoute);
 

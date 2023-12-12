@@ -1,6 +1,6 @@
 const {courses} =require("../../db")
 
-const createCoursesController = async (body) =>{
+const createProductsController = async (body) =>{
     console.log(body)
     const {courseName} = body
     const [newCourse, created] = await courses.findOrCreate({
@@ -12,5 +12,5 @@ const createCoursesController = async (body) =>{
 }
 
 module.exports={
-    createCoursesController
+    createProductsController
 }

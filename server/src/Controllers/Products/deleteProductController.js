@@ -1,6 +1,6 @@
 const { courses } = require("../../db")
 
-const deleteCourseController = async (id) =>{
+const deleteProductController = async (id) =>{
     const deletedCourse = await courses.destroy({
         where:{id}
     })
@@ -9,5 +9,5 @@ const deleteCourseController = async (id) =>{
 }
 
 module.exports= {
-    deleteCourseController
+    deleteProductController
 }

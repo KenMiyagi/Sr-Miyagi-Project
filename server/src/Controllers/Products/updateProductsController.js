@@ -1,6 +1,6 @@
 const { courses } = require("../../db");
 
-const updateCoursesController = async (body, id) => {
+const updateProductsController = async (body, id) => {
   const updated = await courses.update(body, { where: { id: id } });
 
   if (updated) {
@@ -13,5 +13,5 @@ const updateCoursesController = async (body, id) => {
 };
 
 module.exports = {
-  updateCoursesController,
+  updateProductsController,
 };
