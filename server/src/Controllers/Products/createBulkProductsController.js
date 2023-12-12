@@ -1,8 +1,9 @@
 const {products} =require("../../db")
 
 const createBulkProductsController = async (body) =>{
+    console.log(body);
     const newProduct = await products.bulkCreate(body)
-    if(created) return newProduct
+    if(newProduct.length>0) return newProduct
     return false
 }
 
