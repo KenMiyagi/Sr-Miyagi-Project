@@ -1,15 +1,17 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
+import testImg from "../../pictures/horizontal.jpg"
 
 function MyCarousel() {
 
-    const images = [
+    /* const images = [
         "https://images8.alphacoders.com/104/1045499.jpg",
         "https://images8.alphacoders.com/612/612623.jpg",
         "https://images.alphacoders.com/808/808387.jpg",
         "https://images.alphacoders.com/959/959220.jpg",
         "https://images4.alphacoders.com/941/941206.jpg"
-    ]
+    ] */
+    const images = [testImg,testImg,testImg,testImg,testImg]
 
  return (
 <div>
