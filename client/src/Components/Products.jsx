@@ -5,7 +5,7 @@ import ProductCard from "../Components/ProductCard"
 const Products = () => {
     const products = useSelector((state)=>state.products)
   return (
-    <div>
+    <div class="d-flex justify-content-center flex-wrap">
       {
         products?.map(({productName, image, description, originalPrice, fridayPrice, type, color, state, size, seasson})=>(
             <ProductCard
