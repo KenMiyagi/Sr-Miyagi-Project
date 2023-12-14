@@ -1,9 +1,10 @@
 import React from 'react'
+import AddProducts from "../Components/Admin/AddProducts"
 
 const Admin = () => {
   return (
     <div>
-      <h1>SOY DASH</h1>
+      <AddProducts/>
     </div>
   )
 }
