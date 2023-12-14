@@ -20,11 +20,11 @@ export default function rootReducer(state = initialState, action){
             const indexOfLastPageGet = state.currentPage  * ITEMS_PER_PAGE;
             const indexOfFirstPageGet = indexOfLastPageGet - ITEMS_PER_PAGE;
 
-            const productsRender = action.payload.slice(indexOfFirstPageGet,indexOfLastPageGet)
+            const productsRenderGot = action.payload.slice(indexOfFirstPageGet,indexOfLastPageGet)
             return{
                 ...state,
                 products:action.payload,
-                productsPaginate: productsRender,
+                productsPaginate: productsRenderGot,
                 pages: pagesGot,
                 currentPage:1
             }
@@ -32,6 +32,7 @@ export default function rootReducer(state = initialState, action){
             var currentP
             if(isNaN(action.payload)){
                 if(action.payload==="next"){
+                    alert("Entra next")
                     //CURRENT ++
                     if(state.currentPage !== state.pages.length){ currentP = state.currentPage+1}else{
                         return{...state}
@@ -50,11 +51,11 @@ export default function rootReducer(state = initialState, action){
             const pages = [...Array(totalPages + 1).keys()].slice(1);
             const indexOfLastPage = currentP  * ITEMS_PER_PAGE;
             const indexOfFirstPage = indexOfLastPage - ITEMS_PER_PAGE;
-            const videoGamesRender = state.filteredPaginate.slice(indexOfFirstPage,indexOfLastPage)
+            const productsRender = state.filteredPaginate.slice(indexOfFirstPage,indexOfLastPage)
             return {
                 ...state,
                 currentPage: currentP,
-                productsRender: videoGamesRender,
+                productsPaginate: productsRender,
                 pages:pages
             }
     

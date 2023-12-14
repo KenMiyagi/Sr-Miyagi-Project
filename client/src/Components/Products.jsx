@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import ProductCard from "../Components/ProductCard"
 import CustomFilters from "../Components/Filters"
+import Pagination from "../Components/Pagination"
 
 const Products = () => {
     const products = useSelector((state)=>state.products)
@@ -30,6 +31,7 @@ const Products = () => {
             }
             </div>
         </div>
+        <Pagination/>
     </div>
   )
 }

@@ -11,7 +11,7 @@ const createProductHandler = async (req, res) =>{
     try {
         const newCourse = await createProductsController(req.body)
         if(newCourse) return res.status(200).json(newCourse)
-        return res.status(400).json({error: "Course with the same name already exists."})
+        return res.status(400).json({error: "Product with the same name already exists."})
     } catch (error) {
         res.status(500).json({error: error.message})
     }
@@ -21,7 +21,7 @@ const createBulkProductHandler = async (req, res) =>{
     try {
         const newCourse = await createBulkProductsController(req.body)
         if(newCourse) return res.status(200).json(newCourse)
-        return res.status(400).json({error: "Couldn't create the course chunk"})
+        return res.status(400).json({error: "Couldn't create the product chunk"})
     } catch (error) {
         res.status(500).json({error: error.message})
     }
@@ -31,7 +31,7 @@ const getAllProductsHandler = async (req, res) =>{
     try {
         const products = await getAllProductsController()
         if(products) return res.status(200).json(products)
-        return res.status(400).json({error: "There is no courses."})
+        return res.status(400).json({error: "There is no products."})
         
     } catch (error) {
         res.status(500).json({error: error.message})
@@ -52,7 +52,7 @@ const updateProductsHandler = async (req, res) =>{
     try {
         const courses = await updateProductsController(req.body, req.params.id)
         if(courses) return res.status(200).json(courses)
-        return res.status(400).json({error:"Couldn't update the course."})
+        return res.status(400).json({error:"Couldn't update the product."})
     } catch (error) {
         res.status(500).json({error:error.message})
     }
@@ -61,8 +61,8 @@ const updateProductsHandler = async (req, res) =>{
 const deleteProductHandler = async (req, res) =>{
     try {
         deletedCourse = await deleteProductController(req.params.id)
-        if(deletedCourse) return res.status(200).json({message: "The course has been removed"})
-        return res.status(400).json({error:"The course doesn't exist"})
+        if(deletedCourse) return res.status(200).json({message: "The product has been removed"})
+        return res.status(400).json({error:"The product doesn't exist"})
     } catch (error) {
         return res.status(500).json({error:error.message})
     }
