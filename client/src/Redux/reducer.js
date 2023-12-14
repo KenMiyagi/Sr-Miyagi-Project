@@ -7,7 +7,7 @@ const initialState = {
     products:[],
 
     //Pagination
-    currentPage:1, productsPaginate:[],pages:[]
+    currentPage:1, productsPaginate:[],pages:[], filteredPaginate:[],
 }
 
 export default function rootReducer(state = initialState, action){
@@ -24,6 +24,7 @@ export default function rootReducer(state = initialState, action){
             return{
                 ...state,
                 products:action.payload,
+                filteredPaginate:action.payload,
                 productsPaginate: productsRenderGot,
                 pages: pagesGot,
                 currentPage:1
@@ -32,7 +33,6 @@ export default function rootReducer(state = initialState, action){
             var currentP
             if(isNaN(action.payload)){
                 if(action.payload==="next"){
-                    alert("Entra next")
                     //CURRENT ++
                     if(state.currentPage !== state.pages.length){ currentP = state.currentPage+1}else{
                         return{...state}

@@ -1,26 +1,24 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { paginate } from '../Redux/Actions/paginateFiltersActions'
 
 const Pagination = () => {
-
+    const pages = useSelector((state)=>state.pages)
     const dispatch = useDispatch()
 
-    const prevPage = () =>{
-        dispatch(paginate("prev"))
-    }
-
-    const nextPage = () =>{
-        dispatch(paginate("next"))
+    const pagination = (x) =>{
+        dispatch(paginate(x))
     }
   return (
     <nav aria-label="Page navigation example" class="d-flex justify-content-center">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" onClick={()=>prevPage()}>Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" onClick={()=>nextPage()}>Next</a></li>
+            <li class="page-item"><a class="page-link" onClick={()=>pagination("prev")}>Previous</a></li>
+            {
+                pages.map((p, i)=>(
+                    <li key={i} class="page-item"><a class="page-link" onClick={()=>pagination(p)}>{p}</a></li>
+                ))
+            }
+            <li class="page-item"><a class="page-link" onClick={()=>pagination("next")}>Next</a></li>
         </ul>
     </nav>
   )
