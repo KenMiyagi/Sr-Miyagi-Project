@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import ProductCard from "../Components/ProductCard"
-import CustomFilters from "../Components/Filters"
-import Pagination from "../Components/Pagination"
+import ProductCard from "../../Components/Home/ProductCard"
+import CustomFilters from "../../Components/Home/Filters"
+import Pagination from "../../Components/Home/Pagination"
 
 const Products = () => {
     const products = useSelector((state)=>state.products)

@@ -2,7 +2,7 @@ import {Route, Routes} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./Views/Home"
-import NavBar from "./Components/NavBar"
+import NavBar from "./Components/Home/NavBar"
 import './App.css'
 
 function App() {

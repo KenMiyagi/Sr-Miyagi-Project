@@ -1,5 +1,5 @@
 import React from 'react'
-import testImg from "../../pictures/vertical.jpg"
+import testImg from "../../../pictures/vertical.jpg"
 
 const ProductCard = (props) => {
     const {productName, image, description, originalPrice, fridayPrice, type, color, state, size, seasson} = props

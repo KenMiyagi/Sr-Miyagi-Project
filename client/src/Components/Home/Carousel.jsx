@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
-import testImg from "../../pictures/horizontal.jpg"
+import testImg from "../../../pictures/horizontal.jpg"
 
 function MyCarousel() {
 

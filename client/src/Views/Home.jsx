@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import MyCarousel from "../Components/Carousel"
-import Warning from "../Components/Warning"
-import Products from "../Components/Products"
+import MyCarousel from "../Components/Home/Carousel"
+import Warning from "../Components/Home/Warning"
+import Products from "../Components/Home/Products"
 import { useDispatch } from 'react-redux'
 import { getProducts } from '../Redux/Actions/productsActions'
 
