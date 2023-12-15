@@ -32,7 +32,11 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull:false
         },
-        color:{
+        gender:{
+            type: DataTypes.STRING,
+            allowNull:false
+        },
+        ageTarget:{
             type: DataTypes.STRING,
             allowNull:false
         },
