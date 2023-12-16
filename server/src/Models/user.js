@@ -28,15 +28,20 @@ module.exports = (sequelize) =>{
             type: DataTypes.STRING,
             allowNull: false
         },
-        reserved:{
+        reserved: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             defaultValue: [],
             allowNull: true,
         },
-        favs:{
+        favs: {
             type: DataTypes.ARRAY(DataTypes.STRING),
             defaultValue: [],
             allowNull: true,
+        },
+        role: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "user",
         },
         superUser:{
             type: DataTypes.BOOLEAN,

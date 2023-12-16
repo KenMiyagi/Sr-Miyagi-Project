@@ -5,16 +5,19 @@ const {getAdminsByIdController} = require("../Controllers/Admin/getAdminsByIdCon
 const {deleteAdminController} = require("../Controllers/Admin/deleteAdminController")
 const {restoreAdminController} = require("../Controllers/Admin/restoreAdminController")
 
+const { getUserAccController } = require("../Controllers/User/getUserAccController")
+
 const adminSignUpHandler = async (req, res)=>{
     try {
-        const adminToken = await createAdminAccController(req.body)
-        if(adminToken === "used") return res.status(400).json({error: "Used account"})
+        const userAccount = getUserAccController(req.body.email)
+        if (userAccount) res.status(400).json({error: "Email in use"})
+
+        const token = await createAdminAccController(req.body)
+        if(adminToken === "used") return res.status(400).json({error: "Email in use"})
         if(adminToken === "wrongKey") return res.status(400).json({error: "Wrong create key"})
 
-        res.status(200).json({...adminToken, type:"admin"})
+        res.status(200).json(token)
     } catch (error) {
-        console.log(error)
-        console.log('Hello')
         if(error.message=== "Validation Error") return res.status(400).json({error: "Used account"})
         res.status(500).json(error.message)
     }

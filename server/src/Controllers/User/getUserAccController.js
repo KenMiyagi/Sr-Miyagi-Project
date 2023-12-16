@@ -1,23 +1,28 @@
-const { admin } = require("../../db");
+const { user } = require("../../db");
+const { areaTraining } = require("../../db");
 
-//EMAIL
-/* const path = require("path");
+const path = require("path");
 const transporter = require("../../Tools/email");
 const fs = require("fs");
 const emailUser = process.env.EMAIL_USER;
 const emailTemplate = fs.readFileSync(
   path.join(__dirname, "../../Templates/emailRecovery.html"),
   "utf-8"
-); */
+);
 
-const getAdminAccController = async (email, code) => {
-  const adminAcc = await admin.findOne({
+const getUserAccController = async (email, code) => {
+  const userAcc = await user.findOne({
     where: { email },
-    /* include: [
-    ], */
+    include: [
+      {
+        model: areaTraining,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+    ],
   });
 
-  /* if ((code, adminAcc)) {
+  if (code && userAcc) {
     const emailTemplateConValores = emailTemplate.replace(
       "${randomCode}",
       code
@@ -29,7 +34,6 @@ const getAdminAccController = async (email, code) => {
       subject: `Codigo de recuperacion`,
       html: emailTemplateConValores,
     };
-
     transporter.sendMail(menssageRegister, (error, info) => {
       if (error) {
         console.error("Error al enviar el correo electrónico :", error);
@@ -37,12 +41,11 @@ const getAdminAccController = async (email, code) => {
         console.log("Correo electrónico enviado con éxito:", info.response);
       }
     });
-  } */
+  }
 
-  if(adminAcc) return adminAcc
-  return false
+  return userAcc;
 };
 
 module.exports = {
-  getAdminAccController,
+  getUserAccController,
 };
