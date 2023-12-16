@@ -8,16 +8,8 @@ const getAdminsController = async (value) =>{
             where: {deletedAt:{
                 [Op.ne]: null
                 }},
-            include:[
-                {
-                    model:training
-                },
-                {
-                    model:offer
-                }
-    
-            ]
         })
+
         if(adminsDeleted.length > 0){
             for(let i = 0; i<adminsDeleted.length ; i++){
                 adminsDeleted[i].password=0
@@ -26,15 +18,6 @@ const getAdminsController = async (value) =>{
         }return []
     }else if(value!=="deleted"){
         const admins = await admin.findAll({
-            include:[
-                {
-                    model:training
-                },
-                {
-                    model:offer
-                }
-    
-            ]
         })
         if(admins.length > 0){
             for(let i = 0; i<admins.length ; i++){

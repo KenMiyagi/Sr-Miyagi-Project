@@ -1,6 +1,9 @@
 require("dotenv").config();
 const { Sequelize } = require("sequelize");
 const ProductsModel = require("./Models/products")
+const AdminsModel = require("./Models/admins")
+const UsersModel = require("./Models/users")
+
 const { DB_USER, DB_PASSWORD, DB_HOST, SERVER_URL } = process.env;
 
 /* const sequelize = new Sequelize(SERVER_URL, {
@@ -20,13 +23,19 @@ const sequelize = new Sequelize(
 );
 
 ProductsModel(sequelize)
+AdminsModel(sequelize)
+UsersModel(sequelize)
 
 const {
-products
+products,
+admin,
+user,
 } = sequelize.models;
 
 module.exports = {
   products,
+  admin,
+  user,
   ...sequelize.models,
   conn: sequelize,
 };

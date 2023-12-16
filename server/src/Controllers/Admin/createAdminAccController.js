@@ -4,8 +4,9 @@ const bcrypt = require("bcryptjs");
 const {SIGNATURE} = process.env
 const {CREATE_KEY} = process.env
 
-const createAdminAccController = async (props) =>{
-    const {password, email, createKey, name} = props
+const createAdminAccController = async (props, query) =>{
+    const createKey = query.createKey
+    const {password, email, name} = props
     const saltRounds = 10
     const hashedPassword = await bcrypt.hash(password, saltRounds)
     const defaultProfilePicture = "https://res.cloudinary.com/da785kmjd/image/upload/v1695009407/unnamed_fum3we.png"
@@ -22,7 +23,8 @@ const createAdminAccController = async (props) =>{
                 /* include:[
                 ] */
             })
-            const token = jwt.sign(newAdminFound,SIGNATURE)
+            const tkn = newAdminFound.dataValues
+            const token = jwt.sign({...tkn, password:0},SIGNATURE)
 
             return {token} // , token
         }

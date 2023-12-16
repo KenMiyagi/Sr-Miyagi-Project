@@ -1,16 +1,17 @@
-const { createUserAccController } = require("../Controller/User/createUserAccController");
+const { createUserAccController } = require("../Controllers/User/createUserAccController");
 const { getUsersController } = require("../Controllers/User/getUsersController");
 const { updateUserController } = require("../Controllers/User/updateUserController");
-const { getCompanyAccController } = require("../Controllers/Companies/getCompanyAccController");
 const { getUsersByIdController } = require("../Controllers/User/getUsersByIdController");
 const { deleteUserController } =require("../Controllers/User/deleteUserController")
 const { restoreUserController } =require("../Controllers/User/restoreUserController")
 const { getUserByNameController } = require("../Controllers/User/getUserByNameController");
 const { updatePassUserController } = require("../Controllers/User/updatePassUserController");
-  
+
+const { getAdminAccController } = require("../Controllers/Admin/getAdminAccController")
+
   const userSignUpHandler = async (req, res) => {
     try {
-      const findAcc = await getCompanyAccController(req.body.email);
+      const findAcc = await getAdminAccController(req.body.email);
       if (findAcc) return res.status(400).json({ error: "Email in use" });
   
       const userToken = await createUserAccController(req.body);
@@ -19,7 +20,7 @@ const { updatePassUserController } = require("../Controllers/User/updatePassUser
       return res.status(200).json({ ...userToken, type: "user" });
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({ error: error.message });
+      return res.status(500).json({ error: error.message });
     }
   };
   

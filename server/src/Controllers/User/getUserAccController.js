@@ -1,28 +1,27 @@
 const { user } = require("../../db");
-const { areaTraining } = require("../../db");
 
-const path = require("path");
+/* const path = require("path");
 const transporter = require("../../Tools/email");
 const fs = require("fs");
 const emailUser = process.env.EMAIL_USER;
 const emailTemplate = fs.readFileSync(
   path.join(__dirname, "../../Templates/emailRecovery.html"),
   "utf-8"
-);
+); */
 
 const getUserAccController = async (email, code) => {
   const userAcc = await user.findOne({
     where: { email },
-    include: [
+  /*   include: [
       {
         model: areaTraining,
         attributes: ["name"],
         through: { attributes: [] },
       },
-    ],
+    ], */
   });
 
-  if (code && userAcc) {
+  /* if (code && userAcc) {
     const emailTemplateConValores = emailTemplate.replace(
       "${randomCode}",
       code
@@ -41,9 +40,9 @@ const getUserAccController = async (email, code) => {
         console.log("Correo electrónico enviado con éxito:", info.response);
       }
     });
-  }
-
-  return userAcc;
+  } */
+  if (userAcc) return userAcc;
+  return false
 };
 
 module.exports = {
