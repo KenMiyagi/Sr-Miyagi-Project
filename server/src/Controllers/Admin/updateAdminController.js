@@ -1,4 +1,4 @@
-const {admin, training, offer} = require("../../db")
+const {admin} = require("../../db")
 const bcrypt = require("bcryptjs");
 
 const updateAdminController = async (props, id) =>{
@@ -7,16 +7,7 @@ const updateAdminController = async (props, id) =>{
     const updated = await admin.update(
         password ? {...props,password : hashedPassword}: props,{where:{id}})
     if(updated){
-        const updatedAdmin = await admin.findOne({where:{id},
-            include:[
-                {
-                    model:training
-                },
-                {
-                    model:offer
-                }
-
-            ]})
+        const updatedAdmin = await admin.findOne({where:{id}})
         return updatedAdmin
     } throw Error("Something went wrong")
 }

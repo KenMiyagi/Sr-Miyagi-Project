@@ -28,9 +28,17 @@ module.exports = (sequelize) =>{
             allowNull: false
         },
         role: {
-            type: DataTypes.STRING,
+            type:DataTypes.STRING,
             allowNull: false,
             defaultValue: "admin",
+        },
+        ban: {
+            type:DataTypes.JSON,
+            allowNull:false,
+            defaultValue: {
+                isBan:false,
+                reason:"Not banned"
+            }
         }
     },
     { timestamps: false })

@@ -14,12 +14,11 @@ const { getAdminAccController } = require("../Controllers/Admin/getAdminAccContr
       const findAcc = await getAdminAccController(req.body.email);
       if (findAcc) return res.status(400).json({ error: "Email in use" });
   
-      const userToken = await createUserAccController(req.body);
-      if (userToken === "used")
+      const token = await createUserAccController(req.body);
+      if (token === "used")
         return res.status(400).json({ error: "Email in use" });
-      return res.status(200).json({ ...userToken, type: "user" });
+      return res.status(200).json(token);
     } catch (error) {
-      console.log(error.message);
       return res.status(500).json({ error: error.message });
     }
   };
@@ -56,14 +55,6 @@ const { getAdminAccController } = require("../Controllers/Admin/getAdminAccContr
     }
   };
   
-  const getFreelancersHandler = async (req, res) => {
-    try {
-      const freelancers = await getFreelancersController();
-      res.status(200).json(freelancers);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
-  };
   
   const deleteUserHandler = async (req, res) =>{
     try {

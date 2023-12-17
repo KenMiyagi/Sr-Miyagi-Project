@@ -1,4 +1,4 @@
-const {admin, training, offer} = require("../../db")
+const {admin} = require("../../db")
 const { Op } = require('sequelize')
 
 const getAdminsController = async (value) =>{

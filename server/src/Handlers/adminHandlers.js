@@ -15,7 +15,6 @@ const adminSignUpHandler = async (req, res)=>{
         const token = await createAdminAccController(req.body, req.query)
         if(token === "used") return res.status(400).json({error: "Email in use"})
         if(token === "wrongKey") return res.status(400).json({error: "Wrong create key"})
-
         res.status(200).json(token)
     } catch (error) {
         if(error.message=== "Validation Error") return res.status(400).json({error: "Used account"})

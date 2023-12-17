@@ -1,17 +1,8 @@
-const {admin, training, offer} = require("../../db")
+const {admin} = require("../../db")
 
 const getAdminsByIdController = async (id) =>{
     const foundAdmin = await admin.findOne({
-        where: {id},
-        include:[
-            {
-                model:training
-            },
-            {
-                model:offer
-            }
-
-        ]
+        where: {id}
     })
     foundAdmin.password=0
     if(foundAdmin) return foundAdmin
