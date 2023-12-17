@@ -12,11 +12,10 @@ const { getAdminAccController } = require("../Controllers/Admin/getAdminAccContr
   const userSignUpHandler = async (req, res) => {
     try {
       const findAcc = await getAdminAccController(req.body.email);
-      if (findAcc) return res.status(400).json({ error: "Email in use" });
-  
+      if (findAcc) return res.status(400).json({ error: "El email ya está en uso" });
       const token = await createUserAccController(req.body);
       if (token === "used")
-        return res.status(400).json({ error: "Email in use" });
+        return res.status(400).json({ error: "El email ya está en uso" });
       return res.status(200).json(token);
     } catch (error) {
       return res.status(500).json({ error: error.message });
