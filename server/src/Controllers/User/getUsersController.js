@@ -16,7 +16,6 @@ const getUsersController = async (value) =>{
         if(users.length > 0){
             for(let i = 0; i<users.length ; i++){
                 users[i].password=0
-                console.log(users[i].deletedAt);
             }
         return users;
      }
