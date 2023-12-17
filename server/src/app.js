@@ -25,10 +25,16 @@ server.get("/decode", (req, res)=>{
             } else {
                 return res.status(200).json(decoded)
             }
-          });
+        });
     } catch (error) {
         return res.status(444).json({error:error.message})
     }
+})
+
+const { adminAuthMiddleware } = require("./Middlewares/adminAuth")
+
+server.get("/verified", adminAuthMiddleware, (req, res)=>{
+    res.send("SE ENTRO, este es el user:",req.user.name)
 })
 ////////////////////////////////TEST
 
