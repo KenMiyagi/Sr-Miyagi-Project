@@ -10,10 +10,10 @@ const { getUserAccController } = require("../Controllers/User/getUserAccControll
 const adminSignUpHandler = async (req, res)=>{
     try {
         const userAccount = await getUserAccController(req.body.email)
-        if (userAccount) return res.status(400).json({error: "Email in use"})
+        if (userAccount) return res.status(400).json({error: "El email ya está en uso"})
 
         const token = await createAdminAccController(req.body, req.query)
-        if(token === "used") return res.status(400).json({error: "Email in use"})
+        if(token === "used") return res.status(400).json({error: "El email ya está en uso"})
         if(token === "wrongKey") return res.status(400).json({error: "Wrong create key"})
         res.status(200).json(token)
     } catch (error) {
