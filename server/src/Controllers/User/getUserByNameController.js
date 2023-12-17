@@ -8,10 +8,10 @@ const getUserByNameController = async (name) => {
         if(name){
         const findByNameUser = await user.findAll({
             where:{
-                freelancer:true,
+                /* freelancer:true, */
                 [Op.or] : [
                     {name:{[Op.iLike]: `%${name}%`}},
-                    {description:{[Op.iLike]: `%${name}%` }}
+                    /* {description:{[Op.iLike]: `%${name}%` }} */
                 ]
             }
         })

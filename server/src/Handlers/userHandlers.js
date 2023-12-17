@@ -91,7 +91,6 @@ const { getAdminAccController } = require("../Controllers/Admin/getAdminAccContr
   }
   
   const updatePassUserHandler = async (req, res)=> {
-    console.log("hola");
     try {
       const { oldPassword, newPassword } = req.body;
       const { id } = req.params;
