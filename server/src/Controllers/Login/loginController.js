@@ -5,7 +5,7 @@ const {SIGNATURE} = process.env
 const loginController = async (acc, password) =>{
     const validPassword = await bcrypt.compare(password, acc.password)
     if(!validPassword) {
-        throw Error("Credenciales inválidas")
+        return false
     }
 
     const token = jwt.sign(acc, SIGNATURE)
