@@ -33,8 +33,8 @@ server.get("/decode", (req, res)=>{
 
 const { adminAuthMiddleware } = require("./Middlewares/adminAuth")
 
-server.get("/verified", adminAuthMiddleware, (req, res)=>{
-    res.send("SE ENTRO, este es el user:",req.user.name)
+server.post("/verified", adminAuthMiddleware, (req, res)=>{
+    return res.send(`SE ENTRO, este es el user:${req.user.name}`)
 })
 ////////////////////////////////TEST
 
