@@ -5,6 +5,11 @@ const {CREATE_KEY} = process.env
 const updateUserController = async (props, id) =>{
     const {password, createKey} = props
     const saltRounds = 10;
+    
+    const hashedPassword = props?.password ? await bcrypt.hash(props.password, saltRounds) : null
+    if(hashedPassword && CREATE_KEY !== createKey){
+        throw Error("You don't have enough permission to change passwords")
+    }
     const foundUser = await user.findByPk(id);
     const oldPassword = foundUser.dataValues.password;
     if(password){
@@ -12,11 +17,6 @@ const updateUserController = async (props, id) =>{
         if(validPassword){
             throw Error("La contraseña es igual a la anterior")
         }
-    }
-
-    const hashedPassword = props?.password ? await bcrypt.hash(props.password, saltRounds) : null
-    if(hashedPassword && CREATE_KEY !== createKey){
-        throw Error("You don't have enough permission to change passwords")
     }
     const updated = await user.update(
         password ? {...props,password : hashedPassword}: props, {where : {id}})
