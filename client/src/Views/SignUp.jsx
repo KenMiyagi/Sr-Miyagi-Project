@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
-import styles from '../Style/Login.module.css';
-
-const Login = () => {
-
-
+import React from 'react'
+import styles from '../Style/SignUp.module.css';
+const SignUp = () => {
   return (
     <div className={styles.registrationForm}>
         <form className={styles.form}>
             <div className={styles.formIcon}>
                 <span><i className="icon icon-user"></i></span>
+            </div>
+            <div className={styles.formGroup}>
+                <input
+                    type="text"
+                    className={`${styles.formControl} ${styles.item}`}
+                    placeholder="Username"
+                />
             </div>
             <div className={styles.formGroup}>
                 <input
@@ -25,11 +29,25 @@ const Login = () => {
                 />
             </div>
             <div className={styles.formGroup}>
-                <button
-                    type="button"
-                    className={`btn btn-block ${styles.createAccount}`}
-                >
-                Ingresar
+                <input
+                    type="password"
+                    className={`${styles.formControl} ${styles.item}`}
+                    placeholder="Password"
+                />
+            </div>
+            <div className={styles.formGroup}>
+            <input
+                type="text"
+                className={`${styles.formControl} ${styles.item}`}
+                placeholder="Phone Number"
+            />
+            </div>
+            <div className={styles.formGroup}>
+            <button
+                type="button"
+                className={`btn btn-block ${styles.createAccount}`}
+            >
+                Create Account
             </button>
             </div>
         </form>
@@ -42,7 +60,7 @@ const Login = () => {
         </div>
       </div> */}
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default SignUp
