@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styles from '../Style/Login.module.css';
 
 const Login = () => {
-
-
   return (
     <div className={styles.registrationForm}>
         <form className={styles.form}>
