@@ -8,10 +8,9 @@ const adminAuthMiddleware = (req, res, next) =>{
 
         jwt.verify(token, process.env.SIGNATURE, (err,user)=>{
             if(err) return res.status(403).json({error:err})
-            if(user.role==="admin"){
+            if(user.ban.isBan===false){
                 req.user = user; next()
             }else{
-                if(user.ban.isBan===false) return res.status(401).json({error:"You don't have permission to do that."})
                 return res.status(401).json({error:"This account is banned."})
             }
         })
