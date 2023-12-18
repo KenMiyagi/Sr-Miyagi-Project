@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import Home from "./Views/Home"
 import NavBar from "./Components/Home/NavBar"
 import Admin from "./Views/Admin"
+import Login from "./Views/Login"
 import './App.css'
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/admin" element={<Admin/>}/>
+          <Route path="/login" element={<Login/>}/>
         </Routes>
       </div>
   )
