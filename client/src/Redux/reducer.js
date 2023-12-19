@@ -1,6 +1,10 @@
 import{
     GET_PRODUCTS,
-    PAGINATE
+    PAGINATE,
+    LOGIN,
+    LOG_OUT,
+    ERRORS,
+    CLEAR_ERRORS
 } from "./actionTypes"
 
 const initialState = {
@@ -8,6 +12,12 @@ const initialState = {
 
     //Pagination
     currentPage:1, productsPaginate:[],pages:[], filteredPaginate:[],
+
+    //Account
+    currentAccount:{},
+
+    //Errors
+    errors:{}
 }
 
 export default function rootReducer(state = initialState, action){
@@ -58,8 +68,30 @@ export default function rootReducer(state = initialState, action){
                 productsPaginate: productsRender,
                 pages:pages
             }
-    
-
+        //Account
+        case LOGIN:
+            return {
+              ...state,
+              currentAccount: action.payload,
+              errors: {},
+            };
+        case LOG_OUT:
+            return {
+                ...state,
+                currentAccount: {},
+            };
+        //Errors
+        case ERRORS:
+            const errObj = action.payload;
+            return {
+                ...state,
+                errors: { ...state.errors, [errObj.type]: errObj.error },
+            };
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                errors: {},
+            };
         default:
             return { ...state };
     }
