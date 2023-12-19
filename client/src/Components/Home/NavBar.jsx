@@ -4,12 +4,25 @@ import { Link, Link as RouterLink } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import style from "../Styles/NavBar.module.css"
+import { logOut } from "../../Redux/Actions/accountActions";
 
 const NavBar = () => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const profilePicture = useSelector((state)=>state?.currentAccount?.profilePicture)
+
   const location = useLocation().pathname;
   console.log(location);
   console.log(location === "/");
+
+  const handleLogOut = () =>{
+    dispatch(logOut())
+    navigate("/login")
+  }
 
   return (
     <nav className="navbar sticky-top navbar-expand-lg bg-body-tertiary ">
@@ -157,22 +170,26 @@ const NavBar = () => {
             </li>
           </ul>
           <form className="d-flex" role="search">
+            <img style={localStorage.token ? { visibility:"visible"}: { visibility:"hidden"}} src={localStorage.profilePicture} className={style.profilePicture} alt="PFP"/>
+            <p className={style.name} style={localStorage.token ? { visibility:"visible"}: { visibility:"hidden"}} >{localStorage.name}</p>
             <button
               className="btn btn-outline-success"
               type="submit"
-              onClick={() =>
+              onClick={
+                ()=>handleLogOut()
+                /* () =>
                 window.open(
                   "https://api.whatsapp.com/send?phone=3142219525",
                   "_blank"
                 )
-              }
+               */}
               /* data-bs-toggle="collapse" */
               data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              Contacto
+              Cerrar sesión
             </button>
           </form>
         </div>

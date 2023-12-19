@@ -11,6 +11,10 @@ export function login(user){
             const {token} = response?.data
             localStorage.setItem("token",token)
             const decodedAccount = jwtDecode(token, {complete: true})
+            localStorage.setItem("profilePicture",decodedAccount.profilePicture)
+            localStorage.setItem("name",decodedAccount.name)
+            localStorage.setItem("email",decodedAccount.email)
+            localStorage.setItem("token",decodedAccount.number)
             dispatch({
                 type:LOGIN,
                 payload: decodedAccount
