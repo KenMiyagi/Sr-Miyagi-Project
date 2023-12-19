@@ -1,23 +1,29 @@
 import { HOST, LOGIN, LOG_OUT, ERRORS} from "../actionTypes"
-import * as jwt_decode from "jwt-decode";
+/* import * as jwt_decode from "jwt-decode"; */
+import {jwtDecode} from "jwt-decode";
+/* import jws from "jsonwebtoken"; */
 import axios from "axios"
 
 export function login(user){
     return async function(dispatch){
         try {
-            console.log("LOG: ",HOST+"/login");
-            const {token} = (await axios.post(HOST+"/login",user)).data
+            const response = await axios.post(HOST+"/login",user)
+            const {token} = response?.data
             localStorage.setItem("token",token)
-            const decodedAccount = jwt_decode(token)
+            console.log("Antes de jwt");
+            const decodedAccount = jwtDecode(token, {complete: true})
+            console.log("TOKEN: ",token);
+            console.log("DECODEDTOKEN: ",decodedAccount)
             dispatch({
                 type:LOGIN,
                 payload: decodedAccount
             })
             return {error:false}
         } catch (error) {
+            console.log(error);
             dispatch({
                 type:ERRORS,
-                payload: { type: LOGIN, error: error.response.data }
+                payload: { type: LOGIN, error: error?.response?.data }
             })
         }
     }
