@@ -40,7 +40,7 @@ const Login = () => {
             }
         })
     }
-
+const [emailStyles,setEmailStyles] = useState({border: "2px solid red"})
 
   return (
     <div className={styles.registrationForm}>
@@ -50,15 +50,24 @@ const Login = () => {
             </div>
             <div className={styles.formGroup}>
                 <input
+                style={errors?.email? {border: "2px solid red"} : {border: "2px solid green"}}
+                /* onMouseLeave={()=>errors?.email ?setEmailStyles({border: "2px solid red"}): setEmailStyles(null)} */
+               /* onMouseEnter={()=>console.log("ENTRAAAAAAAA")}
+         onFocus={()=>console.log("HOVEEEER")}
+        onBlur={()=>console.log("BLUUUUUR")} */
                 name="email"
                 type="text"
                 onChange={handleChange}
                 className={`${styles.formControl} ${styles.item}`}
                 placeholder="Email"
                 />
+                <div className={styles.tooltip}>!
+                    <span className={styles.tooltiptext}>{errors.email}</span>
+                </div>
             </div>
             <div className={styles.formGroup}>
                 <input
+                style={errors?.email? {border: "2px solid red"} : {border: "2px solid green"}}
                 name="password"
                 type="password"
                 onChange={handleChange}

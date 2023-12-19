@@ -175,14 +175,7 @@ const NavBar = () => {
             <button
               className="btn btn-outline-success"
               type="submit"
-              onClick={
-                ()=>handleLogOut()
-                /* () =>
-                window.open(
-                  "https://api.whatsapp.com/send?phone=3142219525",
-                  "_blank"
-                )
-               */}
+              onClick={()=>handleLogOut()}
               /* data-bs-toggle="collapse" */
               data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
@@ -199,3 +192,10 @@ const NavBar = () => {
 };
 
 export default NavBar;
+
+/* () =>
+                window.open(
+                  "https://api.whatsapp.com/send?phone=3142219525",
+                  "_blank"
+                )
+               */
