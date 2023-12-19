@@ -10,10 +10,7 @@ export function login(user){
             const response = await axios.post(HOST+"/login",user)
             const {token} = response?.data
             localStorage.setItem("token",token)
-            console.log("Antes de jwt");
             const decodedAccount = jwtDecode(token, {complete: true})
-            console.log("TOKEN: ",token);
-            console.log("DECODEDTOKEN: ",decodedAccount)
             dispatch({
                 type:LOGIN,
                 payload: decodedAccount
