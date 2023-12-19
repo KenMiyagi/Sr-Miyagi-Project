@@ -3,6 +3,8 @@ import styles from '../Style/Login.module.css';
 import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import loginValidation from "../Validations/loginValidation"
+import { login } from "../Redux/Actions/accountActions"
+import { setNewErrors, clearErrors } from "../Redux/Actions/errorsActions"
 
 const Login = () => {
     const navigate = useNavigate()
@@ -29,14 +31,14 @@ const Login = () => {
     const handlerLogin = (event) =>{
         event.preventDefault()
         alert("Handler funcionando")
-        /* dispatch(login(form)).then((response)=>{
+        dispatch(login(form)).then((response)=>{
             if(response.error){
-                dispatch(setErrors({ type: "LOGIN", error: response.response.data }))
+                dispatch(setNewErrors({ type: "LOGIN", error: response.response.data }))
             }else{
                 navigate("/")
                 dispatch(clearErrors())
             }
-        }) */
+        })
     }
 
 
@@ -66,7 +68,7 @@ const Login = () => {
             </div>
             <div className={styles.formGroup}>
                 <button
-                onClick={()=>handlerLogin()}
+                onClick={(e)=>handlerLogin(e)}
                 type="button"
                 className={`btn btn-block ${styles.createAccount}`}
                 >
