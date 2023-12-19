@@ -70,6 +70,7 @@ export default function rootReducer(state = initialState, action){
             }
         //Account
         case LOGIN:
+            console.log("REDUCER LOGIN PAYLOAD", action.payload);
             return {
               ...state,
               currentAccount: action.payload,

@@ -30,9 +30,9 @@ const Login = () => {
 
     const handlerLogin = (event) =>{
         event.preventDefault()
-        alert("Handler funcionando")
         dispatch(login(form)).then((response)=>{
             if(response.error){
+                console.log(response.error);
                 dispatch(setNewErrors({ type: "LOGIN", error: response.response.data }))
             }else{
                 navigate("/")
