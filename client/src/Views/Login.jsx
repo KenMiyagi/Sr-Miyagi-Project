@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import styles from '../Style/Login.module.css';
-import { useDispatch } from "react-redux"
-import { Link, useNavigate } from "react-router-dom"
+import { useDispatch, useSelector} from "react-redux"
+import { NavLink, Link, useNavigate } from "react-router-dom"
 import loginValidation from "../Validations/loginValidation"
 import { login } from "../Redux/Actions/accountActions"
 import { setNewErrors, clearErrors } from "../Redux/Actions/errorsActions"
 
 const Login = () => {
     const navigate = useNavigate()
+    const globalErrors = useSelector((state)=>state.errors)
     const [errors, setErrors] = useState({});
     const [form,setForm] = useState({
         meil:"",
@@ -83,10 +84,7 @@ const Login = () => {
             </div>
                 <p style={errors.password?{visibility:"visible"}:{visibility:"hidden"}} className={styles.errorLabel}>{errors.password}</p>
             <div className={styles.formGroup}>
-            <p style={errors.password?{visibility:"visible"}:{visibility:"hidden"}} className={styles.errorLabel}>{errors.password}</p>
-            {globalErrors?.LOGIN?.error ? (
-              <text className="text-red-500">{globalErrors.LOGIN.error}</text>
-            ) : null}
+            <p style={globalErrors?.LOGIN?.error?{visibility:"visible"}:{visibility:"hidden"}} className={styles.serverError}>{globalErrors?.LOGIN?.error}</p>
                 <button
                 onClick={(e)=>handlerLogin(e)}
                 type="button"
@@ -94,6 +92,7 @@ const Login = () => {
                 >
                 Ingresar
                 </button>
+                <div className={styles.signUpDiv} ><p>¿No tenes cuenta? </p><NavLink style={{textDecoration: "none", marginLeft:"7px"}} to="/signup"><p className={styles.createOneHere} > Create una acá</p></NavLink></div>
             </div>
         </form>
         {console.log("FORM:",form)}
