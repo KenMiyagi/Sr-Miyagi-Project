@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate()
     const [errors, setErrors] = useState({});
     const [form,setForm] = useState({
-        email:"",
+        meil:"",
         password:""
     })
 
@@ -29,10 +29,11 @@ const Login = () => {
     const dispatch = useDispatch()
 
     const handlerLogin = (event) =>{
-        event.preventDefault()
-        dispatch(login(form)).then((response)=>{
+        if(event) event.preventDefault()
+        dispatch(login({...form,email:form.meil})).then((response)=>{
+            console.log(response?.error);
             if(response.error){
-                console.log(response.error);
+                console.log(response?.error);
                 dispatch(setNewErrors({ type: "LOGIN", error: response.response.data }))
             }else{
                 navigate("/")
@@ -40,7 +41,12 @@ const Login = () => {
             }
         })
     }
-const [emailStyles,setEmailStyles] = useState({border: "2px solid red"})
+
+    const enterPressSubmit = (event) =>{
+        if(event.key==="Enter"){
+            handlerLogin()
+          }
+    }
 
   return (
     <div className={styles.registrationForm}>
@@ -50,39 +56,44 @@ const [emailStyles,setEmailStyles] = useState({border: "2px solid red"})
             </div>
             <div className={styles.formGroup}>
                 <input
-                style={errors?.email? {border: "2px solid red"} : {border: "2px solid green"}}
+                autoComplete="off"
+                style={errors?.meil? {border: "2px solid red"} : {border: "2px solid green"}}
                 /* onMouseLeave={()=>errors?.email ?setEmailStyles({border: "2px solid red"}): setEmailStyles(null)} */
                /* onMouseEnter={()=>console.log("ENTRAAAAAAAA")}
          onFocus={()=>console.log("HOVEEEER")}
         onBlur={()=>console.log("BLUUUUUR")} */
-                name="email"
+                name="meil"
                 type="text"
                 onChange={handleChange}
-                className={`${styles.formControl} ${styles.item}`}
+                className={`${styles.formControl} ${styles.item} ${styles.formInput}`}
                 placeholder="Email"
                 />
-                <div className={styles.tooltip}>!
-                    <span className={styles.tooltiptext}>{errors.email}</span>
-                </div>
             </div>
+            <p style={errors.meil?{visibility:"visible"}:{visibility:"hidden"}} className={styles.errorLabel}>{errors.meil}</p>
             <div className={styles.formGroup}>
                 <input
-                style={errors?.email? {border: "2px solid red"} : {border: "2px solid green"}}
+                style={errors?.password? {border: "2px solid red"} : {border: "2px solid green"}}
                 name="password"
                 type="password"
                 onChange={handleChange}
-                className={`${styles.formControl} ${styles.item}`}
+                className={`${styles.formControl} ${styles.item} ${styles.formInput}`}
                 placeholder="Password"
+                onKeyDown={(event)=>{enterPressSubmit(event)}}
                 />
             </div>
+                <p style={errors.password?{visibility:"visible"}:{visibility:"hidden"}} className={styles.errorLabel}>{errors.password}</p>
             <div className={styles.formGroup}>
+            <p style={errors.password?{visibility:"visible"}:{visibility:"hidden"}} className={styles.errorLabel}>{errors.password}</p>
+            {globalErrors?.LOGIN?.error ? (
+              <text className="text-red-500">{globalErrors.LOGIN.error}</text>
+            ) : null}
                 <button
                 onClick={(e)=>handlerLogin(e)}
                 type="button"
                 className={`btn btn-block ${styles.createAccount}`}
                 >
                 Ingresar
-            </button>
+                </button>
             </div>
         </form>
         {console.log("FORM:",form)}

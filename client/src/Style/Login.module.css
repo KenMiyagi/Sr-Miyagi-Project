@@ -142,30 +142,13 @@ html, body {
         line-height: 70px;
     }
 }
+.errorLabel{
+    height: 30px;
+    margin-bottom: 30px;
+    color: rgb(255, 0, 0);
+}
 
+.formInput{
+    margin-bottom: 0;
+}
 /* ERROR TOOL TIP */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  }
-  
-  .tooltip .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 105%;
-  }
-  
-  .tooltip:hover .tooltiptext {
-    visibility: visible;
-  }
