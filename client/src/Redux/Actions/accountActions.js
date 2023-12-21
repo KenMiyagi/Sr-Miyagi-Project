@@ -1,7 +1,5 @@
 import { HOST, LOGIN, LOG_OUT, ERRORS} from "../actionTypes"
-/* import * as jwt_decode from "jwt-decode"; */
 import {jwtDecode} from "jwt-decode";
-/* import jws from "jsonwebtoken"; */
 import axios from "axios"
 
 export function login(user){

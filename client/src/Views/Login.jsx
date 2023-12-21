@@ -6,6 +6,7 @@ import loginValidation from "../Validations/loginValidation"
 import { login } from "../Redux/Actions/accountActions"
 import { setNewErrors, clearErrors } from "../Redux/Actions/errorsActions"
 import { GoogleLogin } from "@react-oauth/google";
+import {jwtDecode} from "jwt-decode";
 
 const Login = () => {
     const navigate = useNavigate()
@@ -84,6 +85,34 @@ const Login = () => {
                 />
             </div>
                 <p style={errors.password?{visibility:"visible"}:{visibility:"hidden"}} className={styles.errorLabel}>{errors.password}</p>
+                <GoogleLogin
+                onSuccess={(CredentialResponse) => {
+                  const CredentialResponseDecoded = jwtDecode(
+                    CredentialResponse.credential
+                  , {complete:true});
+                  dispatch(
+                    login({
+                      email: CredentialResponseDecoded.email,
+                      google: true,
+                    }))
+                    .then((response) => {
+                    if (response.error) {
+                      dispatch(
+                        setNewErrors({
+                          type: "LOGIN",
+                          error: response.response.data,
+                        })
+                      );
+                    } else {
+                      dispatch(clearErrors())
+                      navigate("/home");
+                    }
+                  });
+                }}
+                onError={() => {
+                  console.log("LOGIN FAILED");
+                }}
+              />
             <div className={styles.formGroup}>
             <p style={globalErrors?.LOGIN?.error?{visibility:"visible"}:{visibility:"hidden"}} className={styles.serverError}>{globalErrors?.LOGIN?.error}</p>
                 <button
@@ -95,44 +124,6 @@ const Login = () => {
                 </button>
                 <div className={styles.signUpDiv} ><p>¿No tenes cuenta? </p><NavLink style={{textDecoration: "none", marginLeft:"7px"}} to="/signup"><p className={styles.createOneHere} > Create una acá</p></NavLink></div>
             </div>
-            <GoogleLogin
-                onSuccess={(CredentialResponse) => {
-                  const CredentialResponseDecoded = jwt_decode(
-                    CredentialResponse.credential
-                  );
-                  dispatch(
-                    login({
-                      email: CredentialResponseDecoded.email,
-                      google: true,
-                    })
-                    
-                  ).then((postError) => {
-                    if (postError) {
-                      dispatch(
-                        setNewErrors({
-                          type: "LOGIN",
-                          error: postError.response.data,
-                        })
-                      );
-                    } else {
-                      Swal.fire({
-                        title: "Inicio de sesión exitoso!",
-                        text: "Bienvenido",
-                        icon: "success",
-                        customClass: {
-                          popup: "inicioSesion",
-                        },
-                        iconColor: "#a7b698",
-                        confirmButtonColor: "#a7b698",
-                      });
-                      navigate("/home");
-                    }
-                  });
-                }}
-                onError={() => {
-                  console.log("LOGIN FAILED");
-                }}
-              />
         </form>
         {console.log("FORM:",form)}
         {console.log("ERRORS:",errors)}
