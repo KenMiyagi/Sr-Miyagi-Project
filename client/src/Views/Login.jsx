@@ -94,6 +94,7 @@ const Login = () => {
                     login({
                       email: CredentialResponseDecoded.email,
                       google: true,
+                      googleAcc:CredentialResponseDecoded
                     }))
                     .then((response) => {
                     if (response.error) {

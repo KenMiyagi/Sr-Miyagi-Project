@@ -3,10 +3,30 @@ const { getUserAccController } = require("../Controllers/User/getUserAccControll
 const { loginController } = require("../Controllers/Login/loginController")
 
 const loginHandler = async (req, res) =>{
-    const {email, password, google} = req.body
+    const {email, password, google, googleAcc} = req.body
     try {
-        if(google==="xd"){
-
+        console.log("GOOGLE ACC:",googleAcc);
+        if(google){
+            //Si existe inicia sesión.
+            const adminAcc = await getAdminAccController(email.toLowerCase())
+            if(adminAcc){
+                let {token, acc} = await loginController(adminAcc.dataValues, password)
+                if(token){
+                    if(acc.ban.isBan!==true) return res.status(200).json({token})
+                    return res.status(400).json({error: "Usuario bloqueado"})
+                    }
+            }else{
+            //Caso contrario la crea.
+            }
+            const userAcc = await getUserAccController(email.toLowerCase())
+            if(userAcc){
+                let {token, acc} = await loginController(userAcc.dataValues, password)
+                if(token){
+                    if(acc.ban.isBan!==true) return res.status(200).json({token})
+                    return res.status(400).json({error: "Usuario bloqueado"})
+                }
+            }
+            return res.status(404).json({error: "Usuario o contraseña inválidos"})
         }else{
         const adminAcc = await getAdminAccController(email.toLowerCase())
         if(adminAcc){
